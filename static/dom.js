@@ -19,36 +19,36 @@ app.DOMHandler = {
 
         //Append rows to table element
         for (let i = 0; i < tableRows.length; i++) {
-            table.innerHTML += tableRows[i];
+            table.appendChild(tableRows[i]);
         }
     },
 
     createPlanetRows: function(planetData) {
         var tableRows = [];
+        var properties = ["name", "diameter", "climate", "terrain", "surface_water", "population", "residents"];
+
         for (let i = 0; i < planetData.length; i++) {
-            row = "<tr>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["name"];
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["diameter"] + " km";
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["climate"];
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["terrain"];
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["surface_water"];
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["population"] + " people";
-            row += "</td>";
-            row += "<td class='table-data'>";
-            row += planetData[i]["residents"];
-            row += "</td>";
-            row += "</tr>";
+            var row = document.createElement("tr");
+            row.className = "table-row";
+
+            for (let j = 0; j < properties.length; j++) {
+                var tableData = document.createElement("td");
+                tableData.className = "table-data";
+                
+                dataFormatting = "";
+                switch(properties[j]) {
+                    case "diameter":
+                        dataFormatting = " km";
+                        break;
+                    case "population":
+                        dataFormatting = " people";
+                        break;
+                    default:
+                        break;
+                }
+                tableData.innerHTML = planetData[i][properties[j]] + dataFormatting;
+                row.appendChild(tableData);
+            }
             tableRows.push(row);
         }
         return tableRows;
