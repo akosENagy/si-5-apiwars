@@ -5,10 +5,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
+    <script type="text/javascript" src="static/api.js" defer></script>
+    <script type="text/javascript" src="static/dom.js" defer></script>
     <script type="text/javascript" src="static/main.js" defer></script>
     <title>API Wars</title>
 </head>
 <body>
-
+    <div class="main-container">
+        <h1>Star Wars universe planets</h1>
+        <button id="previous-button">Previous</button>
+        <button id="next-button">Next</button>        
+        <div class="table-container">
+            <table style="border: solid 2px black" id="planet-table">
+                <th class="table-header">Name</th>
+                <th class="table-header">Diameter</th>
+                <th class="table-header">Climate</th>
+                <th class="table-header">Terrain</th>
+                <th class="table-header">Surface Water Percentage</th>
+                <th class="table-header">Population</th>
+                <th class="table-header">Residents</th>
+                <th class="table-header"></th>
+            </table>
+        </div>
+    </div>
 </body>
 </html>
