@@ -9,12 +9,12 @@ app.DOMHandler = {
         //Set the buttons
         $('#next-button').off();
         $('#next-button').on("click", function() {
-            nextPageUrl = planetData["next"].replace("http" , "https");
+            nextPageUrl = planetData["next"];
             app.APIHandler.getAPIData(nextPageUrl, app.DOMHandler.populatePlanetsTable);
         });
         $('#previous-button').off();
         $('#previous-button').on("click", function() {
-            previousPageUrl = planetData["previous"].replace("http" , "https");
+            previousPageUrl = planetData["previous"];
             app.APIHandler.getAPIData(previousPageUrl, app.DOMHandler.populatePlanetsTable);
         });
 
