@@ -1,5 +1,5 @@
 function main() {
-    app.APIHandler.getAPIData("https://swapi.co/api/planets/", app.DOMHandler.populatePlanetsTable);
+    app.APIHandler.getAPIData("http://swapi.co/api/planets/", app.DOMHandler.populatePlanetsTable);
 }
 
 $('document').ready(main);
