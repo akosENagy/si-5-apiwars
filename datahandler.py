@@ -1,8 +1,13 @@
 import psycopg2
+import os
+import urllib
 from flask import session
 from werkzeug import security
 
 CONNECTION_STRING = "dbname='swapi' user='aakeeka' host='localhost' password='postgresql'"
+
+
+# postgres://syyswmufslybju:d4687fe2ab7f5a4a0be733ebbf099c35b39ebce44ebd09e0e9a7075b1e5bf9c2@ec2-54-228-235-185.eu-west-1.compute.amazonaws.com:5432/d57rjjbj60d0bp
 
 
 def init_db_connection(connection_string=CONNECTION_STRING):
@@ -11,14 +16,26 @@ def init_db_connection(connection_string=CONNECTION_STRING):
     Connection string format: "dbname='dbname' user='user' host='host' password='password'"
     '''
     try:
-        conn = psycopg2.connect(connection_string)
-        # set autocommit option, to do every query when we call it
-        conn.autocommit = True
-        # create a psycopg2 cursor that can execute queries
-        cursor = conn.cursor()
-    except psycopg2.DatabaseError as e:  # TODO don't use this, remember: "raise PythonicError("Errors should never go silently.")
+        urllib.parse.uses_netloc.append('postgres')
+        url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
+        print(url)
+        connection = psycopg2.connect(
+            database=url.path[1:],
+            user=url.username,
+            password=url.password,
+            host=url.hostname,
+            port=url.port
+        )
+        # conn = psycopg2.connect(connection_string)
+        # # set autocommit option, to do every query when we call it
+        # conn.autocommit = True
+        # # create a psycopg2 cursor that can execute queries
+
+        cursor = connection.cursor()
+        print(cursor)
+    except psycopg2.DatabaseError as e:
         print(e)
-        return [[e]] 
+        return [[e]]
 
     return cursor
 
