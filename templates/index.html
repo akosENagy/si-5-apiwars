@@ -4,11 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"></script>
-    <script type="text/javascript" src="static/main.js" defer></script>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js" defer></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" defer></script>
+    <script type="text/javascript" src="static/scripts/api.js" defer></script>
+    <script type="text/javascript" src="static/scripts/dom.js" defer></script>
+    <script type="text/javascript" src="static/scripts/main.js" defer></script>
     <title>API Wars</title>
 </head>
 <body>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">API Wars</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="/">Home</a></li>
+                <li><a href="/register">Register</a></li>
+                <li><a href="/login">Login</a></li>
+                <li><a href="/logout">Logout</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="login-status"><a>{{message}}</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="main-container container">
+        <h1>Star Wars universe planets</h1>
+        <button class="btn btn-primary" id="previous-button">Previous</button>
+        <button class="btn btn-primary" id="next-button">Next</button>        
+        <div class="table-container table-responsive">
+            <table id="planet-table" class="table table-bordered">
+                <thead>
+                    <th>Name</th>
+                    <th>Diameter</th>
+                    <th>Climate</th>
+                    <th>Terrain</th>
+                    <th>Surface Water Percentage</th>
+                    <th>Population</th>
+                    <th>Residents</th>
+                </thead>
+                <tbody id="planets-tablebody">
+                </tbody>
+            </table>
+        </div>
 
+        <div class="modal fade" id="residents-modal" role="dialog">
+            <div class="modal-dialog">    
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Residents of </h4>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered">
+                            <thead>
+                                <th>Name</th>
+                                <th>Height</th>
+                                <th>Mass</th>
+                                <th>Hair color</th>
+                                <th>Skin color</th>
+                                <th>Eye color</th>
+                                <th>Birth year</th>
+                                <th>Gender</th>
+                            </thead>
+                            <tbody id="modal-tablebody">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>     
+            </div>
+        </div>
+        </div>
+    </div>
 </body>
 </html>
