@@ -18,7 +18,6 @@ def init_db_connection(connection_string=CONNECTION_STRING):
     try:
         urllib.parse.uses_netloc.append('postgres')
         url = urllib.parse.urlparse(os.environ.get('DATABASE_URL'))
-        print(url)
         connection = psycopg2.connect(
             database=url.path[1:],
             user=url.username,
@@ -28,11 +27,10 @@ def init_db_connection(connection_string=CONNECTION_STRING):
         )
         # conn = psycopg2.connect(connection_string)
         # # set autocommit option, to do every query when we call it
-        # conn.autocommit = True
+        connection.autocommit = True
         # # create a psycopg2 cursor that can execute queries
 
         cursor = connection.cursor()
-        print(cursor)
     except psycopg2.DatabaseError as e:
         print(e)
         return [[e]]
@@ -46,7 +44,7 @@ def insert_user(username, password):
     '''
     password = security.generate_password_hash(password, method='pbkdf2:sha256', salt_length=8)
     try:
-        cursor = init_db_connection(connection_string=CONNECTION_STRING)
+        cursor = init_db_connection()
         cursor.execute("""INSERT INTO users (username, password) VALUES (%s, %s);""", (username, password))
         return True
     except psycopg2.ProgrammingError as e:
