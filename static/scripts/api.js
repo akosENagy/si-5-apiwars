@@ -12,7 +12,6 @@ app.APIHandler = {
                 callback(data); 
             }
         };  
-
         request.send();
     },
 }
